@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 :root {
   --main-color: tomato;
+  --subtle-color: lightslategrey;
 }
 * {
   font-family: "Montserrat", sans-serif;
@@ -49,10 +50,19 @@ svg {
   margin-bottom: 0.5rem;
 }
 #saved-note {
+  padding: 1rem;
   box-shadow: 0 0 10px var(--main-color);
   filter: brightness(90%);
   border-radius: 6px;
+  display: flex-box;
+  height: 7rem;
+
+  #timestamp {
+    text-align: end;
+    color: var(--subtle-color);
+  }
 }
+
 /* Input Seite*/
 .main-area {
   display: flex;
@@ -63,9 +73,9 @@ svg {
   margin: 1rem 1rem 0 1rem;
   display: flex;
 
-  #titel {
+  #title {
     width: 100%;
-    height: auto;
+    height: 100px;
     font-size: 4rem;
     background-color: transparent;
     border: none;
@@ -83,7 +93,7 @@ svg {
   }
 }
 #text {
-  font-size: 2rem;
+  font-size: 1.5rem;
   background-color: transparent;
   flex-grow: 1;
   resize: none;
@@ -94,5 +104,9 @@ svg {
 @media only screen and (max-width: 1200px) {
   .header {
     flex-wrap: wrap-reverse;
+
+    #title {
+      height: 160px;
+    }
   }
 }
