@@ -79,15 +79,6 @@ svg {
   outline: none;
   resize: none;
 }
-.btn-container {
-  display: flex;
-  gap: 0.4rem;
-  margin: 0.4rem;
-
-  button {
-    width: 70px;
-  }
-}
 #text {
   font-size: 1.5rem;
   background-color: transparent;
@@ -97,6 +88,16 @@ svg {
   outline: none;
   margin: 1rem;
 }
+.btn-container {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0.4rem;
+
+  button {
+    width: 70px;
+  }
+}
+
 @media only screen and (max-width: 1200px) {
   .header {
     flex-wrap: wrap-reverse;
