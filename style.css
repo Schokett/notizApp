@@ -4,6 +4,7 @@
   --subtle-color: lightslategrey;
   --secent-color: #f9f6f2;
   --field-color: #fff;
+  --highlights-color: #ecbeb59a;
 }
 * {
   font-family: "Montserrat", sans-serif;
@@ -55,7 +56,7 @@ svg {
 }
 #saved-note {
   padding: 1rem;
-  box-shadow: 0 0 10px var(--main-color);
+  box-shadow: 0 0 10px var(--highlights-color);
   border-radius: 6px;
   height: 6rem;
   background-color: var(--field-color);
