@@ -4,7 +4,7 @@
   --subtle-color: lightslategrey;
   --secent-color: #f9f6f2;
   --field-color: #fff;
-  --highlights-color: #ecbeb59a;
+  --highlights-color: #fdece8;
 }
 * {
   font-family: "Montserrat", sans-serif;
@@ -65,6 +65,13 @@ svg {
   border-radius: 6px;
   height: 6rem;
   background-color: var(--field-color);
+  cursor: pointer;
+  border-color: var(--main-color);
+  transition: all 0.2s ease-in-out;
+}
+#saved-note:hover {
+  background-color: var(--highlights-color);
+  box-shadow: 0 0 5px 3px var(--field-color);
 }
 #timestamp {
   text-align: end;
