@@ -50,7 +50,7 @@ svg {
   flex-direction: column;
   gap: 1rem;
 }
-#new-note {
+#new-note-btn {
   display: flex;
   font-size: 1.1rem;
   font-weight: 500;
@@ -73,9 +73,31 @@ svg {
   background-color: var(--highlights-color);
   box-shadow: 0 0 5px 3px var(--field-color);
 }
+#saved-note:not(.selected-note) {
+  /* cursor: default; */
+}
 #timestamp {
-  text-align: end;
+  width: 100%;
+  text-align: right;
+  font-style: oblique;
   color: var(--subtle-color);
+  font-size: 0.8rem;
+}
+#title-history {
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding-bottom: 1rem;
+}
+#text-history {
+  color: var(--subtle-color);
+  padding-bottom: 1rem;
+}
+#title-history,
+#text-history {
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /* Input Seite*/
