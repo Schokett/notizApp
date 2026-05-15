@@ -30,16 +30,22 @@ function passDataNewNote(noteElement) {
   const InputField = document.getElementById("title");
   const textareaField = document.getElementById("text");
 
-  if (InputField.value || textareaField.value == null) {
+  if (InputField.value == null || textareaField.value == null) {
     note.idnr++;
     note.title = InputField.value;
     note.text = textareaField.value;
     note.date = Date.now();
 
     fusion(noteElement, InputField, textareaField);
-  } else {
+  } else if (InputField.value == "" && textareaField.value == "") {
     InputField.classList.add("border-light");
     textareaField.classList.add("border-light");
+    alert("Fülle bitte beide Felder aus, um speichern zu können!");
+  } else if (textareaField.value == "") {
+    textareaField.classList.add("border-light");
+    alert("Fülle bitte beide Felder aus, um speichern zu können!");
+  } else {
+    InputField.classList.add("border-light");
     alert("Fülle bitte beide Felder aus, um speichern zu können!");
   }
 }
