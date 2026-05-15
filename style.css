@@ -59,7 +59,7 @@ svg {
   justify-content: center;
   margin-bottom: 0.5rem;
 }
-#saved-note {
+.saved-note {
   padding: 1rem;
   box-shadow: 0 0 10px var(--highlights-color);
   border-radius: 6px;
@@ -68,32 +68,33 @@ svg {
   cursor: pointer;
   border-color: var(--main-color);
   transition: all 0.2s ease-in-out;
+  margin-bottom: 1rem;
 }
-#saved-note:hover {
+.saved-note:hover {
   background-color: var(--highlights-color);
-  box-shadow: 0 0 5px 3px var(--field-color);
+  box-shadow: 0 0 5px 3px color-mix(in srgb, var(--main-color), white 50%);
 }
-#saved-note:not(.selected-note) {
+.saved-note:not(.selected-note) {
   /* cursor: default; */
 }
-#timestamp {
+.date-history {
   width: 100%;
   text-align: right;
   font-style: oblique;
   color: var(--subtle-color);
   font-size: 0.8rem;
 }
-#title-history {
+.title-history {
   font-size: 1.2rem;
   font-weight: 700;
   padding-bottom: 1rem;
 }
-#text-history {
+.text-history {
   color: var(--subtle-color);
   padding-bottom: 1rem;
 }
-#title-history,
-#text-history {
+.title-history,
+.text-history {
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
