@@ -1,6 +1,6 @@
 // An object containing a note
 let note = {
-  idnr: 0,
+  idnr: null,
   title: "",
   text: "",
   date: null,
@@ -40,7 +40,6 @@ function passDataNewNote(noteElement) {
 
 //setzt die Objekt daten ins neue note Gerüst
 function fusion(noteElement, InputField, textareaField) {
-  noteElement.id = "saved-note-" + note.idnr;
   const titleTag = noteElement.querySelector(".title-history");
   const textTag = noteElement.querySelector(".text-history");
   const dateTag = noteElement.querySelector(".date-history");
@@ -54,8 +53,7 @@ function fusion(noteElement, InputField, textareaField) {
 
 //Display a new note
 function displayNewNote(noteElement) {
-  const noteContainer = document.getElementById("saved-note-container");
-  noteContainer.prepend(noteElement);
-  console.log(noteContainer);
+  const noteContainerElement = document.getElementById("saved-note-container");
+  noteContainerElement.prepend(noteElement);
+  console.log(note);
 }
-//die Notizen müssen nach timestamp sortiert werden, neu nach oben!
