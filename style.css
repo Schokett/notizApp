@@ -38,7 +38,7 @@ svg {
 }
 /* History Seite*/
 .history-area {
-  border-right: 1px solid var(--subtle-color);
+  /* border-right: 1px solid var(--subtle-color); */
   max-height: calc(100vh - 2rem);
   overflow-y: auto;
   background-color: var(--secent-color);
