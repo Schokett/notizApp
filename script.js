@@ -1,9 +1,9 @@
 // An object containing a note
 let note = {
   idnr: 0,
-  title: "TestTitle",
-  text: "Hier habe ich etwas geschrieben",
-  date: Date.now(),
+  title: "",
+  text: "",
+  date: null,
 };
 
 //Build a framework note
@@ -33,6 +33,7 @@ function passDataNewNote(noteElement) {
   note.idnr++;
   note.title = InputField.value;
   note.text = textareaField.value;
+  note.date = Date.now();
 
   fusion(noteElement, InputField, textareaField);
 }
