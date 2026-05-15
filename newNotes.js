@@ -76,12 +76,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const InputField = document.getElementById("title");
   const textareaField = document.getElementById("text");
 
-  // Wenn man in das Titel-Feld klickt
   InputField.addEventListener("input", function () {
     InputField.classList.remove("border-light");
   });
 
-  // Wenn man in das Text-Feld klickt
   textareaField.addEventListener("input", function () {
     textareaField.classList.remove("border-light");
   });
