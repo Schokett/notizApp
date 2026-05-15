@@ -30,15 +30,21 @@ function passDataNewNote(noteElement) {
   const InputField = document.getElementById("title");
   const textareaField = document.getElementById("text");
 
-  note.idnr++;
-  note.title = InputField.value;
-  note.text = textareaField.value;
-  note.date = Date.now();
+  if (InputField.value || textareaField.value == null) {
+    note.idnr++;
+    note.title = InputField.value;
+    note.text = textareaField.value;
+    note.date = Date.now();
 
-  fusion(noteElement, InputField, textareaField);
+    fusion(noteElement, InputField, textareaField);
+  } else {
+    InputField.classList.add("border-light");
+    textareaField.classList.add("border-light");
+    alert("Fülle bitte beide Felder aus, um speichern zu können!");
+  }
 }
 
-//setzt die Objekt daten ins neue note Gerüst
+//Inserts the object data into the new note structure.
 function fusion(noteElement, InputField, textareaField) {
   const titleTag = noteElement.querySelector(".title-history");
   const textTag = noteElement.querySelector(".text-history");
@@ -55,5 +61,21 @@ function fusion(noteElement, InputField, textareaField) {
 function displayNewNote(noteElement) {
   const noteContainerElement = document.getElementById("saved-note-container");
   noteContainerElement.prepend(noteElement);
-  console.log(note);
+  console.log(noteElement);
 }
+
+//eventlistener
+document.addEventListener("DOMContentLoaded", function () {
+  const InputField = document.getElementById("title");
+  const textareaField = document.getElementById("text");
+
+  // Wenn man in das Titel-Feld klickt
+  InputField.addEventListener("input", function () {
+    InputField.classList.remove("border-light");
+  });
+
+  // Wenn man in das Text-Feld klickt
+  textareaField.addEventListener("input", function () {
+    textareaField.classList.remove("border-light");
+  });
+});

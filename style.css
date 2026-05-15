@@ -123,6 +123,10 @@ svg {
   resize: none;
   overflow: hidden;
   border-radius: 18px;
+  transition: box-shadow 0.1s ease;
+}
+.border-light {
+  box-shadow: 0 0 6px 4px var(--main-color) !important;
 }
 #text {
   padding: 2rem;
@@ -135,6 +139,7 @@ svg {
   border: none;
   outline: none;
   margin: 1rem;
+  transition: box-shadow 0.1s ease;
 }
 #title,
 #text::placeholder {
