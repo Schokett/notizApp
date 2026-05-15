@@ -1,5 +1,5 @@
 // An object containing a note
-let note = {
+const note = {
   idnr: null,
   title: "",
   text: "",
