@@ -13,6 +13,12 @@ function submitNewNote() {
   if (!passDataNewNote()) {
     return;
   }
+  const existingIndex = notes.findIndex((n) => n.idnr === note.idnr);
+  if (existingIndex !== -1) {
+    notes.splice(existingIndex, 1);
+
+    document.getElementById(note.idnr)?.remove();
+  }
   // Daten in HTML Element schreiben
   const htmlElement = buildNewNote(note);
   // HTML Element anzeigen
@@ -21,10 +27,12 @@ function submitNewNote() {
   notes.push({ ...note });
   saveDataLocalStorage();
 
-  const InputField = document.getElementById("title");
+  const inputField = document.getElementById("title");
   const textareaField = document.getElementById("text");
-  InputField.value = "";
+  inputField.value = "";
   textareaField.value = "";
+
+  noteListeners();
 }
 
 //Build a framework note
@@ -47,24 +55,26 @@ function buildNewNote(note) {
   div.appendChild(text);
   div.appendChild(date);
 
-  return div;
+  div.id = note.idnr;
 
-  //passDataNewNote(div);
+  return div;
 }
 
 //Pass data from the text fields to the object
 function passDataNewNote(noteElement) {
-  const InputField = document.getElementById("title");
+  const inputField = document.getElementById("title");
   const textareaField = document.getElementById("text");
 
-  if (InputField.value !== "" && textareaField.value !== "") {
-    note.idnr = getNextId();
-    note.title = InputField.value;
+  if (inputField.value !== "" && textareaField.value !== "") {
+    if (note.idnr === null) {
+      note.idnr = getNextId();
+    }
+    note.title = inputField.value;
     note.text = textareaField.value;
     note.date = Date.now();
     return true;
-  } else if (InputField.value === "" && textareaField.value === "") {
-    InputField.classList.add("border-light");
+  } else if (inputField.value === "" && textareaField.value === "") {
+    inputField.classList.add("border-light");
     textareaField.classList.add("border-light");
     alert("Fülle bitte beide Felder aus, um speichern zu können!");
     return false;
@@ -72,8 +82,8 @@ function passDataNewNote(noteElement) {
     textareaField.classList.add("border-light");
     alert("Fülle bitte beide Felder aus, um speichern zu können!");
     return false;
-  } else if (InputField.value === "") {
-    InputField.classList.add("border-light");
+  } else if (inputField.value === "") {
+    inputField.classList.add("border-light");
     alert("Fülle bitte beide Felder aus, um speichern zu können!");
     return false;
   }
@@ -87,16 +97,18 @@ function displayNewNote(noteElement) {
 
 //eventlistener domloaded
 document.addEventListener("DOMContentLoaded", function () {
-  const InputField = document.getElementById("title");
+  const inputField = document.getElementById("title");
   const textareaField = document.getElementById("text");
 
-  InputField.addEventListener("input", function () {
-    InputField.classList.remove("border-light");
+  inputField.addEventListener("input", function () {
+    inputField.classList.remove("border-light");
   });
 
   textareaField.addEventListener("input", function () {
     textareaField.classList.remove("border-light");
   });
+
+  noteListeners();
 });
 
 function getNextId() {
@@ -111,5 +123,16 @@ function getNextId() {
   }
 
   return nextId;
-  console.log("hier: ", sortedNotes);
+}
+function noteListeners() {
+  const noteEntrysEl = document.querySelectorAll(".saved-note");
+  noteEntrysEl.forEach((noteEntry) => {
+    noteEntry.addEventListener("click", (e) => {
+      document.getElementById("title").value = noteEntry.querySelector(".title-history").innerText;
+
+      document.getElementById("text").value = noteEntry.querySelector(".text-history").innerText;
+
+      note.idnr = Number(noteEntry.id);
+    });
+  });
 }
