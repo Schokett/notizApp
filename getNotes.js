@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
   saveData.forEach((note) => {
     const div = buildNewNote(note);
     if (noteContainerElement) {
-      console.log(saveData);
       noteContainerElement.prepend(div);
     }
   });

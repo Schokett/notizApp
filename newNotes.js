@@ -20,6 +20,11 @@ function submitNewNote() {
 
   notes.push({ ...note });
   saveDataLocalStorage();
+
+  const InputField = document.getElementById("title");
+  const textareaField = document.getElementById("text");
+  InputField.value = "";
+  textareaField.value = "";
 }
 
 //Build a framework note
@@ -53,7 +58,7 @@ function passDataNewNote(noteElement) {
   const textareaField = document.getElementById("text");
 
   if (InputField.value !== "" && textareaField.value !== "") {
-    note.idnr++;
+    note.idnr = getNextId();
     note.title = InputField.value;
     note.text = textareaField.value;
     note.date = Date.now();
@@ -93,3 +98,18 @@ document.addEventListener("DOMContentLoaded", function () {
     textareaField.classList.remove("border-light");
   });
 });
+
+function getNextId() {
+  const sortedNotes = notes.sort((noteA, noteB) => noteA.idnr - noteB.idnr);
+
+  let nextId = 1;
+
+  for (let noteX of sortedNotes) {
+    if (nextId < noteX.idnr) break;
+
+    nextId = noteX.idnr + 1;
+  }
+
+  return nextId;
+  console.log("hier: ", sortedNotes);
+}
