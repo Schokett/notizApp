@@ -134,6 +134,21 @@ function noteListeners() {
       document.getElementById("text").value = noteEntry.querySelector(".text-history").innerText;
 
       note.idnr = Number(noteEntry.id);
+
+      highlightActivNote(noteEntry);
     });
   });
+}
+function highlightActivNote(noteEntry) {
+  const currentActive = document.querySelector(".saved-note.selected-note");
+
+  if (currentActive && currentActive !== noteEntry) {
+    currentActive.classList.remove("selected-note");
+  }
+
+  if (!noteEntry.classList.contains("selected-note")) {
+    noteEntry.classList.add("selected-note");
+  } else {
+    noteEntry.classList.remove("selected-note");
+  }
 }
