@@ -1,5 +1,5 @@
 // An object containing a note
-const note = {
+let note = {
   idnr: null,
   title: "",
   text: "",
@@ -151,4 +151,17 @@ function highlightActivNote(noteEntry) {
   } else {
     noteEntry.classList.remove("selected-note");
   }
+}
+function createNewNote() {
+  const inputField = document.getElementById("title");
+  const textareaField = document.getElementById("text");
+
+  inputField.value = "";
+  textareaField.value = "";
+  note = {
+    idnr: null,
+    title: "",
+    text: "",
+    date: null,
+  };
 }
