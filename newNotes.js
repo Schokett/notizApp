@@ -149,8 +149,6 @@ function highlightActivNote(noteEntry) {
   if (noteEntry) {
     if (!noteEntry.classList.contains("selected-note")) {
       noteEntry.classList.add("selected-note");
-    } else {
-      noteEntry.classList.remove("selected-note");
     }
   }
 }
