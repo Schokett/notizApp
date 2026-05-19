@@ -146,10 +146,12 @@ function highlightActivNote(noteEntry) {
     currentActive.classList.remove("selected-note");
   }
 
-  if (!noteEntry.classList.contains("selected-note")) {
-    noteEntry.classList.add("selected-note");
-  } else {
-    noteEntry.classList.remove("selected-note");
+  if (noteEntry) {
+    if (!noteEntry.classList.contains("selected-note")) {
+      noteEntry.classList.add("selected-note");
+    } else {
+      noteEntry.classList.remove("selected-note");
+    }
   }
 }
 function createNewNote() {
@@ -164,4 +166,5 @@ function createNewNote() {
     text: "",
     date: null,
   };
+  highlightActivNote();
 }
