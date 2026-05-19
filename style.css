@@ -63,7 +63,7 @@ svg {
   padding: 1rem;
   box-shadow: 0 0 10px var(--highlights-color);
   border-radius: 6px;
-  height: 6rem;
+  height: 7rem;
   background-color: var(--field-color);
   cursor: pointer;
   border-color: var(--main-color);
