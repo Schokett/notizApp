@@ -168,3 +168,15 @@ function createNewNote() {
   };
   highlightActivNote();
 }
+function deleteNote() {
+  const existingIndex = notes.findIndex((n) => n.idnr === note.idnr);
+  if (existingIndex !== -1) {
+    notes.splice(existingIndex, 1);
+
+    document.getElementById(note.idnr)?.remove();
+
+    saveDataLocalStorage();
+
+    createNewNote();
+  }
+}
