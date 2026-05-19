@@ -13,6 +13,7 @@ function submitNewNote() {
   if (!passDataNewNote()) {
     return;
   }
+
   const existingIndex = notes.findIndex((n) => n.idnr === note.idnr);
   if (existingIndex !== -1) {
     notes.splice(existingIndex, 1);
