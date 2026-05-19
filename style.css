@@ -134,6 +134,18 @@ svg {
   border-radius: 18px;
   transition: box-shadow 0.1s ease;
 }
+.search {
+  height: 40px;
+  font-size: 1rem;
+  background-color: var(--field-color);
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding-left: 1rem;
+}
+.search:focus {
+  border: 0.1rem solid #e2725b;
+}
 .border-light {
   box-shadow: 0 0 6px 4px var(--main-color) !important;
 }
