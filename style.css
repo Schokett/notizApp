@@ -199,36 +199,42 @@ div.editor-toolbar button {
 .EasyMDEContainer {
   display: flex !important;
   flex-direction: column !important;
-  flex-grow: 1 !important; /* Nimmt den Platz deines alten #text ein */
+  flex-grow: 1 !important;
   margin: 1rem;
 }
 
-/* Originale Textarea unsichtbar halten */
 .EasyMDEContainer textarea {
   display: none !important;
 }
 
-/* 2. Die Toolbar stylen */
 .editor-toolbar {
   border: none !important;
   background-color: var(--field-color);
-  border-radius: 8px 8px 0 0 !important; /* Oben abgerundet */
+  border-radius: 8px 8px 0 0 !important;
   flex-grow: 0 !important;
 }
 
-/* 3. Das Schreibfeld (CodeMirror) wachsen lassen */
 .EasyMDEContainer .CodeMirror {
   border: none !important;
-  border-radius: 0 0 8px 8px !important; /* Unten abgerundet, damit es an die Toolbar andockt */
+  border-radius: 0 0 8px 8px !important;
   background-color: var(--field-color);
-  font-size: 1.5rem; /* Deine Wunschgröße aus dem alten #text */
+  font-size: 1.5rem;
   flex-grow: 1 !important;
   height: auto !important;
 }
 
-/* 4. Scroll-Verhalten im Feld sichern */
 .EasyMDEContainer .CodeMirror-scroll {
-  min-height: 300px; /* Garantiert eine Mindesthöhe */
+  min-height: 300px;
+}
+
+.EasyMDEContainer .CodeMirror textarea {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 @media only screen and (max-width: 1200px) {
   .header {

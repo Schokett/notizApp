@@ -1,4 +1,5 @@
 // An object containing a note
+let easyMDE;
 let note = {
   idnr: null,
   title: "",
@@ -96,7 +97,10 @@ function displayNewNote(noteElement) {
 
 //eventlistener domloaded
 document.addEventListener("DOMContentLoaded", function () {
-  const easyMDE = new EasyMDE({ element: document.getElementById("text") });
+  easyMDE = new EasyMDE({
+    element: document.getElementById("text"),
+    spellChecker: false,
+  });
   const inputField = document.getElementById("title");
   const textareaField = document.getElementById("text");
 
@@ -104,15 +108,37 @@ document.addEventListener("DOMContentLoaded", function () {
     inputField.classList.remove("border-light");
   });
 
-  textareaField.addEventListener("input", function () {
-    textareaField.classList.remove("border-light");
-  });
+  // textareaField.addEventListener("input", function () {
+  //   textareaField.classList.remove("border-light");
+  // });
 
   const searchField = document.querySelector(".search");
   searchField.addEventListener("input", searchNote);
 
   noteListeners();
 });
+// --- DIAGNOSE-BLOCK START ---
+console.log("Diagnose-Skript geladen!");
+
+// Wir lauschen direkt auf das innere Schreibfeld von CodeMirror
+setTimeout(() => {
+  if (easyMDE && easyMDE.codemirror) {
+    const inputTextArea = easyMDE.codemirror.getInputField();
+
+    inputTextArea.addEventListener("focus", () => {
+      console.log("🔴 EDITOR FOKUSSIERT! Jetzt wird getippt oder geklickt...");
+    });
+
+    inputTextArea.addEventListener("blur", (event) => {
+      console.warn("⚠️ FOKUS VERLOREN!");
+      console.log("Wohin ging der Fokus? ->", document.activeElement);
+      console.log("Wer hat den Fokus geklaut? (RelatedTarget) ->", event.relatedTarget);
+    });
+  } else {
+    console.error("EasyMDE konnte für die Diagnose nicht gefunden werden!");
+  }
+}, 1000); // Wartet 1 Sekunde, bis EasyMDE sicher da ist
+// --- DIAGNOSE-BLOCK ENDE ---
 
 function getNextId() {
   const sortedNotes = notes.sort((noteA, noteB) => noteA.idnr - noteB.idnr);
