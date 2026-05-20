@@ -116,8 +116,8 @@ document.addEventListener("DOMContentLoaded", function () {
     element: document.getElementById("text"),
     spellChecker: false,
     renderingConfig: {
-      singleLineBreaks: false,
-      codeSyntaxHighlighting: true,
+      nativeSpellcheck: false,
+      highlightFormatting: false,
     },
   });
   const inputField = document.getElementById("title");
