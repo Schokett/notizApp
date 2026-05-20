@@ -215,10 +215,13 @@ div.editor-toolbar button {
 .EasyMDEContainer .CodeMirror {
   border: none !important;
   border-radius: 0 0 8px 8px !important;
-  background-color: var(--field-color);
+  background-color: var(--field-color) !important;
   font-size: 1.5rem;
   flex-grow: 1 !important;
   height: auto !important;
+}
+.editor-preview {
+  background-color: var(--field-color) !important;
 }
 
 .EasyMDEContainer .CodeMirror-scroll {
