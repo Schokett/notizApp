@@ -30,8 +30,8 @@ function submitNewNote() {
 
   const inputField = document.getElementById("title");
   const textareaField = document.getElementById("text");
-  inputField.value = "";
-  textareaField.value = "";
+  // inputField.value = "";
+  // textareaField.value = "";
 
   noteListeners();
 }
@@ -109,6 +109,9 @@ document.addEventListener("DOMContentLoaded", function () {
     textareaField.classList.remove("border-light");
   });
 
+  const searchField = document.querySelector(".search");
+  searchField.addEventListener("input", searchNote);
+
   noteListeners();
 });
 
@@ -177,4 +180,34 @@ function deleteNote() {
 
     createNewNote();
   }
+}
+
+function searchNote() {
+  // Schritt 1: Elemente und Suchbegriff holen
+  const noteContainer = document.getElementById("saved-note-container");
+  const searchField = document.querySelector(".search");
+  const query = searchField.value.toLowerCase();
+
+  // Schritt 2: Den Container leeren, um Platz für die Ergebnisse zu machen
+  noteContainer.innerHTML = "";
+
+  // Schritt 3: Jede Notiz einzeln prüfen und bei Treffer anzeigen
+  for (let i = 0; i < notes.length; i++) {
+    const currentNote = notes[i];
+
+    // Textinhalte für den Vergleich vorbereiten
+    const noteTitle = currentNote.title.toLowerCase();
+    const noteText = currentNote.text.toLowerCase();
+
+    // Prüfen, ob der Suchbegriff im Titel ODER im Text existiert
+    if (noteTitle.includes(query) || noteText.includes(query)) {
+      // HTML-Element für diese Notiz bauen
+      const noteHtml = buildNewNote(currentNote);
+
+      // Das gebaute Element in den Container einfügen
+      noteContainer.append(noteHtml);
+    }
+  }
+
+  noteListeners();
 }
