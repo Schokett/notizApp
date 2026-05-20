@@ -193,8 +193,8 @@ function searchNote() {
   for (let i = 0; i < notes.length; i++) {
     const currentNote = notes[i];
 
-    const noteTitle = currentNote.title.toLowerCase();
-    const noteText = currentNote.text.toLowerCase();
+    const noteTitle = (currentNote.title || "").toLowerCase();
+    const noteText = (currentNote.text || "").toLowerCase();
 
     if (noteTitle.includes(query) || noteText.includes(query)) {
       const noteHtml = buildNewNote(currentNote);
