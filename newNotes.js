@@ -1,5 +1,7 @@
-// An object containing a note
+// Global variable for the EasyMDE editor instance
 let easyMDE;
+
+// Object structure for a single note
 let note = {
   idnr: null,
   title: "",
@@ -7,8 +9,12 @@ let note = {
   date: null,
 };
 
+// Retrieve existing notes from local storage or initialize an empty array
 const notes = getDataFromLocalstorage() || [];
 
+/**
+ * Handles the submission of a new or edited note, updates the array, and refreshes the UI.
+ */
 function submitNewNote() {
   if (!passDataNewNote()) {
     return;
@@ -34,8 +40,9 @@ function submitNewNote() {
 
   noteListeners();
 }
-
-//Build a framework note
+/**
+ * Generates the HTML structure for a note card to be displayed in the history list.
+ */
 function buildNewNote(note) {
   const div = document.createElement("div");
   const title = document.createElement("p");
@@ -60,7 +67,9 @@ function buildNewNote(note) {
   return div;
 }
 
-//Pass data from the text fields to the object
+/**
+ * Validates form fields and transfers input data into the global note object.
+ */
 function passDataNewNote(noteElement) {
   const inputField = document.getElementById("title");
   const editorText = easyMDE.value();
@@ -91,13 +100,17 @@ function passDataNewNote(noteElement) {
   }
 }
 
-//Display a new note
+/**
+ * Prepends a generated note HTML element to the sidebar container.
+ */
 function displayNewNote(noteElement) {
   const noteContainerElement = document.getElementById("saved-note-container");
   noteContainerElement.prepend(noteElement);
 }
 
-//eventlistener domloaded
+/**
+ * Initializes the application, sets up the text editor, and attaches basic event listeners.
+ */
 document.addEventListener("DOMContentLoaded", function () {
   easyMDE = new EasyMDE({
     element: document.getElementById("text"),
@@ -123,6 +136,9 @@ document.addEventListener("DOMContentLoaded", function () {
   noteListeners();
 });
 
+/**
+ * Calculates and returns the next available unique ID for a new note.
+ */
 function getNextId() {
   const sortedNotes = notes.sort((noteA, noteB) => noteA.idnr - noteB.idnr);
 
@@ -134,6 +150,10 @@ function getNextId() {
   }
   return nextId;
 }
+
+/**
+ * Attaches click event listeners to all note cards in the list to load them into the editor.
+ */
 function noteListeners() {
   const noteEntrysEl = document.querySelectorAll(".saved-note");
   noteEntrysEl.forEach((noteEntry) => {
@@ -148,6 +168,10 @@ function noteListeners() {
     });
   });
 }
+
+/**
+ * Toggles CSS classes to visually highlight the currently selected note card.
+ */
 function highlightActivNote(noteEntry) {
   const currentActive = document.querySelector(".saved-note.selected-note");
 
@@ -161,6 +185,10 @@ function highlightActivNote(noteEntry) {
     }
   }
 }
+
+/**
+ * Clears the editor input fields and resets the global note object for a fresh entry.
+ */
 function createNewNote() {
   const inputField = document.getElementById("title");
 
@@ -175,6 +203,10 @@ function createNewNote() {
   };
   highlightActivNote();
 }
+
+/**
+ * Deletes the currently selected note from the array, DOM, and local storage.
+ */
 function deleteNote() {
   const existingIndex = notes.findIndex((n) => n.idnr === note.idnr);
   if (existingIndex !== -1) {
@@ -187,6 +219,9 @@ function deleteNote() {
   }
 }
 
+/**
+ * Filters and rerenders the notes list based on the search input query.
+ */
 function searchNote() {
   const noteContainer = document.getElementById("saved-note-container");
   const searchField = document.querySelector(".search");
