@@ -20,9 +20,7 @@ function submitNewNote() {
 
     document.getElementById(note.idnr)?.remove();
   }
-  // Daten in HTML Element schreiben
   const htmlElement = buildNewNote(note);
-  // HTML Element anzeigen
   displayNewNote(htmlElement);
 
   notes.push({ ...note });
@@ -98,6 +96,7 @@ function displayNewNote(noteElement) {
 
 //eventlistener domloaded
 document.addEventListener("DOMContentLoaded", function () {
+  const easyMDE = new EasyMDE({ element: document.getElementById("text") });
   const inputField = document.getElementById("title");
   const textareaField = document.getElementById("text");
 
@@ -122,10 +121,8 @@ function getNextId() {
 
   for (let noteX of sortedNotes) {
     if (nextId < noteX.idnr) break;
-
     nextId = noteX.idnr + 1;
   }
-
   return nextId;
 }
 function noteListeners() {
@@ -134,7 +131,7 @@ function noteListeners() {
     noteEntry.addEventListener("click", (e) => {
       document.getElementById("title").value = noteEntry.querySelector(".title-history").innerText;
 
-      document.getElementById("text").value = noteEntry.querySelector(".text-history").innerText;
+      easyMDE.value(noteEntry.querySelector(".text-history").innerText);
 
       note.idnr = Number(noteEntry.id);
 
@@ -177,34 +174,26 @@ function deleteNote() {
     document.getElementById(note.idnr)?.remove();
 
     saveDataLocalStorage();
-
     createNewNote();
   }
 }
 
 function searchNote() {
-  // Schritt 1: Elemente und Suchbegriff holen
   const noteContainer = document.getElementById("saved-note-container");
   const searchField = document.querySelector(".search");
   const query = searchField.value.toLowerCase();
 
-  // Schritt 2: Den Container leeren, um Platz für die Ergebnisse zu machen
   noteContainer.innerHTML = "";
 
-  // Schritt 3: Jede Notiz einzeln prüfen und bei Treffer anzeigen
   for (let i = 0; i < notes.length; i++) {
     const currentNote = notes[i];
 
-    // Textinhalte für den Vergleich vorbereiten
     const noteTitle = currentNote.title.toLowerCase();
     const noteText = currentNote.text.toLowerCase();
 
-    // Prüfen, ob der Suchbegriff im Titel ODER im Text existiert
     if (noteTitle.includes(query) || noteText.includes(query)) {
-      // HTML-Element für diese Notiz bauen
       const noteHtml = buildNewNote(currentNote);
 
-      // Das gebaute Element in den Container einfügen
       noteContainer.append(noteHtml);
     }
   }
