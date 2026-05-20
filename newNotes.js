@@ -10,7 +10,6 @@ let note = {
 const notes = getDataFromLocalstorage() || [];
 
 function submitNewNote() {
-  // Daten in Objekt schreiben
   if (!passDataNewNote()) {
     return;
   }
@@ -29,6 +28,7 @@ function submitNewNote() {
 
   const inputField = document.getElementById("title");
   const textareaField = document.getElementById("text");
+  //
   // inputField.value = "";
   // textareaField.value = "";
 
@@ -102,6 +102,10 @@ document.addEventListener("DOMContentLoaded", function () {
   easyMDE = new EasyMDE({
     element: document.getElementById("text"),
     spellChecker: false,
+    renderingConfig: {
+      singleLineBreaks: false,
+      codeSyntaxHighlighting: true,
+    },
   });
   const inputField = document.getElementById("title");
 
