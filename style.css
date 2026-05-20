@@ -201,6 +201,7 @@ div.editor-toolbar button {
   flex-direction: column !important;
   flex-grow: 1 !important;
   margin: 1rem;
+  border-radius: 8px !important;
 }
 
 .EasyMDEContainer textarea {

@@ -63,26 +63,28 @@ function buildNewNote(note) {
 //Pass data from the text fields to the object
 function passDataNewNote(noteElement) {
   const inputField = document.getElementById("title");
-  const textareaField = document.getElementById("text");
+  const editorText = easyMDE.value();
+  const mdeContainer = document.querySelector(".EasyMDEContainer");
 
-  if (inputField.value !== "" && textareaField.value !== "") {
+  if (inputField.value !== "" && editorText !== "") {
     if (note.idnr === null) {
       note.idnr = getNextId();
     }
     note.title = inputField.value;
-    note.text = textareaField.value;
+    note.text = editorText;
     note.date = Date.now();
     return true;
-  } else if (inputField.value === "" && textareaField.value === "") {
+  } else if (inputField.value === "" && editorText === "") {
     inputField.classList.add("border-light");
-    textareaField.classList.add("border-light");
+    mdeContainer?.classList.add("border-light");
     alert("Fülle bitte beide Felder aus, um speichern zu können!");
     return false;
-  } else if (textareaField.value === "") {
-    textareaField.classList.add("border-light");
+  } else if (editorText === "") {
+    mdeContainer?.classList.add("border-light");
     alert("Fülle bitte beide Felder aus, um speichern zu können!");
     return false;
   } else if (inputField.value === "") {
+    // .value hinzugefügt!
     inputField.classList.add("border-light");
     alert("Fülle bitte beide Felder aus, um speichern zu können!");
     return false;
@@ -102,43 +104,20 @@ document.addEventListener("DOMContentLoaded", function () {
     spellChecker: false,
   });
   const inputField = document.getElementById("title");
-  const textareaField = document.getElementById("text");
 
   inputField.addEventListener("input", function () {
     inputField.classList.remove("border-light");
   });
 
-  // textareaField.addEventListener("input", function () {
-  //   textareaField.classList.remove("border-light");
-  // });
+  easyMDE.codemirror.on("change", function () {
+    document.querySelector(".EasyMDEContainer")?.classList.remove("border-light");
+  });
 
   const searchField = document.querySelector(".search");
   searchField.addEventListener("input", searchNote);
 
   noteListeners();
 });
-// --- DIAGNOSE-BLOCK START ---
-console.log("Diagnose-Skript geladen!");
-
-// Wir lauschen direkt auf das innere Schreibfeld von CodeMirror
-setTimeout(() => {
-  if (easyMDE && easyMDE.codemirror) {
-    const inputTextArea = easyMDE.codemirror.getInputField();
-
-    inputTextArea.addEventListener("focus", () => {
-      console.log("🔴 EDITOR FOKUSSIERT! Jetzt wird getippt oder geklickt...");
-    });
-
-    inputTextArea.addEventListener("blur", (event) => {
-      console.warn("⚠️ FOKUS VERLOREN!");
-      console.log("Wohin ging der Fokus? ->", document.activeElement);
-      console.log("Wer hat den Fokus geklaut? (RelatedTarget) ->", event.relatedTarget);
-    });
-  } else {
-    console.error("EasyMDE konnte für die Diagnose nicht gefunden werden!");
-  }
-}, 1000); // Wartet 1 Sekunde, bis EasyMDE sicher da ist
-// --- DIAGNOSE-BLOCK ENDE ---
 
 function getNextId() {
   const sortedNotes = notes.sort((noteA, noteB) => noteA.idnr - noteB.idnr);
@@ -180,10 +159,10 @@ function highlightActivNote(noteEntry) {
 }
 function createNewNote() {
   const inputField = document.getElementById("title");
-  const textareaField = document.getElementById("text");
 
   inputField.value = "";
-  textareaField.value = "";
+  easyMDE.value("");
+
   note = {
     idnr: null,
     title: "",
